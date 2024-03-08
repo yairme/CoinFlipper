@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Called every frame to check for user input and rotate the coin accordingly.
-/// </summary>
 public class CoinRotation : MonoBehaviour
 {
     [SerializeField] private GameObject coinObject;
     [SerializeField] private float rotationSpeed = 100f;
     [SerializeField] private Vector3 rotationVelocity;
+    [SerializeField] float reductionFactor = 1f; // Adjust this value to control the speed of reduction
+    [SerializeField] float returnSpeed = 1f; // Define a speed for the rotation to return to zero
 
     private bool isRotating;
     private Vector3 previousMousePosition;
 
-    /// <summary>
-    /// Checks for user input and updates the rotation of the coin.
-    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -41,17 +37,31 @@ public class CoinRotation : MonoBehaviour
             Vector3 currentMousePosition = Input.mousePosition;
             Vector3 mouseDelta = currentMousePosition - previousMousePosition;
 
-            transform.Rotate(Vector3.up, mouseDelta.x, Space.World);
-            transform.Rotate(Vector3.right, -mouseDelta.y, Space.World);
+            // Calculate the rotation axis
+            Vector3 rotationAxis = Vector3.Cross(mouseDelta, Camera.main.transform.forward);
+
+            // Rotate the coin around the calculated axis
+            transform.Rotate(rotationAxis, mouseDelta.magnitude, Space.World);
 
             previousMousePosition = currentMousePosition;
-
-            // Decrease rotationVelocity until it reaches 0
-            rotationVelocity = Vector3.Lerp(rotationVelocity, Vector3.zero, Time.deltaTime);
         }
         else
         {
             transform.Rotate(rotationVelocity * Time.deltaTime, Space.World);
+        }
+
+        // Decrease rotationVelocity only when there is velocity
+        if (rotationVelocity.magnitude > 0.1f) // Use a small threshold instead of checking for exact zero
+        {
+            rotationVelocity = Vector3.Lerp(rotationVelocity, Vector3.zero, reductionFactor * Time.deltaTime);
+        }
+
+        if (rotationVelocity.magnitude < 0.1f)
+        {
+            rotationVelocity = Vector3.zero;
+
+            // Interpolate from the current rotation towards the identity rotation
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, returnSpeed * Time.deltaTime);
         }
     }
 }
