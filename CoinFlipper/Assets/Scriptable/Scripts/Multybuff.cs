@@ -9,6 +9,7 @@ public class Multybuff : ScriptableBuff
 {
     protected override bool Buff()
     {
-        return spin.AddSwipeAmount(BuffAmount, price);
+        if (Spin.AddMult(BuffAmount, BasePrice)) { return base.Buff(); }
+        return false;
     }
 }

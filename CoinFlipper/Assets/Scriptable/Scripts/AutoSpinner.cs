@@ -8,6 +8,7 @@ public class AutoSpinner : ScriptableBuff
 {
     protected override bool Buff()
     {
-        return spin.AddSwipeAmount(BuffAmount, price);
+        if(Spin.AddSwipeAmount(BuffAmount, BasePrice)) { return base.Buff(); }
+        return false;
     }
 }

@@ -12,12 +12,12 @@ public class Skins : MonoBehaviour
         SetUp(CoinSkins);
         SetUp(MapSkins);
     }
-    private void SetUp(int[] Skin)
+    private void SetUp(int[] _Skin)
     {
         for (int i = 0; i < CoinSkins.Length; i++)
         {
-            Skin[i] = PlayerPrefs.GetInt(Skin.ToString() + i);
-            switch (Skin[i])
+            _Skin[i] = PlayerPrefs.GetInt(name);
+            switch (_Skin[i])
             {
                 case 0:
                     break;

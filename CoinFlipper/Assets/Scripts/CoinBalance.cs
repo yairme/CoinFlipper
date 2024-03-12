@@ -9,10 +9,9 @@ public class CoinBalance : MonoBehaviour
 {
     private long CoinAmount;
 
-
     void Start()
     {
-        if (PlayerPrefs.HasKey("coins")) { CoinAmount = Convert.ToInt64(PlayerPrefs.GetString("coins")); }
+        if (PlayerPrefs.HasKey("Coins")) { CoinAmount = Convert.ToInt64(PlayerPrefs.GetString("Coins")); }
     }
     private void FixedUpdate()
     {
@@ -20,18 +19,21 @@ public class CoinBalance : MonoBehaviour
     }
     private void ResetGame() 
     {
-        CoinAmount = 0;
+        CoinAmount = 0; // 0 stands for nothing
     }
-
-    public void Swipe(long SwipeAmount)
+    public void SetReseter(Reset _Reset)
     {
-         CoinAmount += SwipeAmount;
+        _Reset.resetGame += ResetGame;
     }
-    public bool Buy(long price)
+    public void Swipe(long _SwipeAmount)
     {
-        if(price <= CoinAmount)
+        CoinAmount += _SwipeAmount;
+    }
+    public bool Buy(long _Price)
+    {
+        if(_Price <= CoinAmount)
         {
-            CoinAmount -= price;
+            CoinAmount -= _Price;
             return true;
         }
         return false;

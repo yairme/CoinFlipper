@@ -14,15 +14,16 @@ public struct Buff
 
 public class BuffsManager : MonoBehaviour
 {
-    [SerializeField]private Spinner spin;
+    [SerializeField] private Spinner Spin;
     [SerializeField] private Buff[] Buffs;
     [SerializeField] private Reset Reseter;
     void Start()
     {
         for (int i = 0; i < Buffs.Length; i++)
         {
-            Buffs[i].buffs.SetIndex(i, spin, Reseter, Buffs[i].but);
+            Buffs[i].buffs.SetIndex(Spin, Reseter, Buffs[i].but);
         }
+        Spin.SetReset(Reseter);
     }
     private void Update()
     {

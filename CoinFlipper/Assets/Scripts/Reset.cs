@@ -7,14 +7,9 @@ using UnityEngine;
 
 public class Reset : MonoBehaviour
 {
-    public Action ResetGame;
-    public Action<int> ShopMultiplayer;
-
+    public Action resetGame;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ResetGame.Invoke();
-        }
+        if (Input.GetKeyDown(KeyCode.Space)) {resetGame.Invoke();} // link het aan een knop
     }
 }

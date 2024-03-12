@@ -7,20 +7,20 @@ public class GemBalance : MonoBehaviour
     private int GemAmount;
     void Start()
     {   
-        GemAmount = PlayerPrefs.GetInt("gems");
+        GemAmount = PlayerPrefs.GetInt("Gems");
     }
 
     public void AddGems()
     {
         GemAmount++;
-        PlayerPrefs.SetInt("gems", GemAmount);
+        PlayerPrefs.SetInt("Gems", GemAmount);
     }
-    public bool RemoveGems(int cost) 
+    public bool RemoveGems(int _Cost) 
     {
-        if (GemAmount >= cost)
+        if (GemAmount >= _Cost)
         {
-            GemAmount -= cost;
-            PlayerPrefs.SetInt("gems", GemAmount);
+            GemAmount -= _Cost;
+            PlayerPrefs.SetInt("Gems", GemAmount);
             return true;
         }
         return false;

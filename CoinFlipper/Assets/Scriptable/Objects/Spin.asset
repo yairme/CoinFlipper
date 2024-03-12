@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27ab765ef3d58804aa0c211fd392df90, type: 3}
-  m_Name: Multy
+  m_Script: {fileID: 11500000, guid: 42ca9123a432bbc4c9a6e5ccab0da58a, type: 3}
+  m_Name: Spin
   m_EditorClassIdentifier: 
-  price: 5
   BuffAmount: 5
+  BasePrice: 5
+  Mult: 1.15

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b38f7f4a3297943861ae39c9970894, type: 3}
   m_Name: Flat
   m_EditorClassIdentifier: 
-  price: 5
   BuffAmount: 5
+  BasePrice: 5
+  Mult: 1.15
