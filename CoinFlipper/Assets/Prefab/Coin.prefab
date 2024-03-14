@@ -120,6 +120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3d270044a7f8246afc20144493a733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
   myScore: 0
   scoreToAdd: 1
+  rotatedAmount: 0
+  rotatedAmountToReset: 200
+  resetRotatedAmount: 0
+  moveSpeed: 100
+  returnRotationSpeed: 1
+  rotatedMaxCheck: 500
+  addMaxRotation: 10
