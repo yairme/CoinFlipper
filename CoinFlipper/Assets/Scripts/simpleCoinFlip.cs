@@ -9,43 +9,118 @@ public class MainTouchLogic : MonoBehaviour
 {
     // Score Settings
     [Header("Score Settings")]
-    [SerializeField] private float myScore;
-    [SerializeField] private float scoreToAdd;
+    /// <summary>
+    /// The current score of the game object
+    /// </summary>
+    [SerializeField] private float myScore; 
+    /// <summary>
+    /// The score to add to the current score
+    /// </summary>
+    [SerializeField] private float scoreToAdd; 
 
     // Rotated Amount Settings
     [Header("Rotated Amount Settings")]
-    [SerializeField] private float rotatedAmount;
-    [SerializeField] private float rotatedAmountToReset;
-    [SerializeField] private float resetRotatedAmount;
+    /// <summary>
+    /// A counter for the rotated amount of the game object so it can reset
+    /// </summary>
+    [SerializeField] private float rotatedAmount; 
+    /// <summary>
+    /// The rotated amount to reset the game object position
+    /// </summary>
+    [SerializeField] private float rotatedAmountToReset; 
+    /// <summary>
+    /// The counter to reset the game object position
+    /// </summary>
+    [SerializeField] private float resetRotatedAmount; 
 
     // Rotation Speed Settings
     [Header("Rotation Speed Settings")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float returnRotationSpeed;
-    [SerializeField] private float maxRotationSpeed;
-    [SerializeField] private float addRotationSpeed;
+    /// <summary>
+    /// The current move speed of the game object
+    /// </summary>
+    [SerializeField] private float moveSpeed; 
+    /// <summary>
+    /// The return rotation speed of the game object so it can reset position
+    /// </summary>
+    [SerializeField] private float returnRotationSpeed; 
+    /// <summary>
+    /// The max rotation speed of the game object so it doesn't rotate too fast
+    /// </summary>
+    [SerializeField] private float maxRotationSpeed; 
+    /// <summary>
+    /// The add rotation speed of the game object so it moves faster
+    /// </summary>
+    [SerializeField] private float addRotationSpeed; 
 
     // Max Rotation Settings
     [Header("Max Rotation Settings")]
-    [SerializeField] private float rotatedMaxCheck;
+    /// <summary>
+    /// The rotated max check of the game object so it can reset
+    /// </summary>
+    [SerializeField] private float rotatedMaxCheck; 
+    /// <summary>
+    /// The add max rotation of the game object so it can keep rotating
+    /// </summary>
     [SerializeField] private float addMaxRotation;
 
-    // Properties
-    public float MyScore { get => myScore; set => myScore = value; }
+    // Score Properties with getters and setters
+    /// <summary>
+    /// The current score of the game object.
+    /// </summary>
+    public float MyScore { get => myScore; set => myScore = value; } 
+
+    /// <summary>
+    /// The score to add to the current score.
+    /// </summary>
     public float ScoreToAdd { get => scoreToAdd; set => scoreToAdd = value; }
+
+    // Rotated Amount Properties with getters and setters
+    /// <summary>
+    /// A counter for the rotated amount of the game object so it can reset.
+    /// </summary>
     public float RotatedAmount { get => rotatedAmount; set => rotatedAmount = value; }
+
+    /// <summary>
+    /// The rotated amount to reset the game object position.
+    /// </summary>
     public float RotatedAmountToReset { get => rotatedAmountToReset; set => rotatedAmountToReset = value; }
+
+    /// <summary>
+    /// The counter to reset the game object position.
+    /// </summary>
     public float ResetRotatedAmount { get => resetRotatedAmount; set => resetRotatedAmount = value; }
+
+    // Rotation Speed Properties with getters and setters
+    /// <summary>
+    /// The current move speed of the game object.
+    /// </summary>
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+
+    /// <summary>
+    /// The return rotation speed of the game object so it can reset position.
+    /// </summary>
     public float ReturnRotationSpeed { get => returnRotationSpeed; set => returnRotationSpeed = value; }
+
+    /// <summary>
+    /// The max rotation speed of the game object so it doesn't rotate too fast.
+    /// </summary>
     public float MaxRotationSpeed { get => maxRotationSpeed; set => maxRotationSpeed = value; }
+
+    /// <summary>
+    /// The add rotation speed of the game object so it moves faster.
+    /// </summary>
     public float AddRotationSpeed { get => addRotationSpeed; set => addRotationSpeed = value; }
+
+    // Max Rotation Properties with getters and setters
+    /// <summary>
+    /// The rotated max check of the game object so it can reset.
+    /// </summary>
     public float RotatedMaxCheck { get => rotatedMaxCheck; set => rotatedMaxCheck = value; }
+
+    /// <summary>
+    /// The add max rotation of the game object so it can keep rotating.
+    /// </summary>
     public float AddMaxRotation { get => addMaxRotation; set => addMaxRotation = value; }
-    public bool Began { get => _began; set => _began = value; }
-    public bool Moved { get => _moved; set => _moved = value; }
-    public bool End { get => _end; set => _end = value; }
-    public bool HasRotated { get => _hasRotated; set => _hasRotated = value; }
 
     // Private fields
     private bool _began;
