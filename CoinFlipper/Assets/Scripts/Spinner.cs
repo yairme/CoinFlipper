@@ -18,7 +18,7 @@ public class Spinner : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt)) { Coin.Swipe(SwipeAmount); }
+        if (Input.GetKeyDown(KeyCode.LeftAlt)) { Coin.Swipe(SwipeAmount);}
     }
 
     private void SetBaseStats()

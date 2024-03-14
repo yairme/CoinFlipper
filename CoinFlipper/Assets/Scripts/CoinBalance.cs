@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class CoinBalance : MonoBehaviour
 {
     private long CoinAmount;
+    [SerializeField] private TMP_Text Text;
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class CoinBalance : MonoBehaviour
     public void Swipe(long _SwipeAmount)
     {
         CoinAmount += _SwipeAmount;
+        print(CoinAmount);
     }
     public bool Buy(long _Price)
     {
@@ -40,6 +43,7 @@ public class CoinBalance : MonoBehaviour
     }
     private void SaveValue()
     {
+        Text.text = CoinAmount.ToString();
         PlayerPrefs.SetString("Coins", CoinAmount.ToString());
     }
 }
