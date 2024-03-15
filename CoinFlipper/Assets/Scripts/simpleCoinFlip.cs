@@ -1,6 +1,10 @@
-
+    
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 /// <summary>
 /// Represents the main logic for handling touch input and controlling the rotation and scoring of a game object.
@@ -8,9 +12,11 @@ using UnityEngine.UI;
 public class MainTouchLogic : MonoBehaviour
 {
     // Score Settings
-    [Header("Score Settings")]
-    [SerializeField] private float myScore;
-    [SerializeField] private float scoreToAdd;
+    [Header("Stefan")]
+    [SerializeField] private CoinBalance CoinBalance;
+    private long BaseSwipeAmount = 1; // StartValues of 1 to have a start position
+    private long Mult = 1;
+    private long SwipeAmount;
 
     // Rotated Amount Settings
     [Header("Rotated Amount Settings")]
@@ -30,23 +36,6 @@ public class MainTouchLogic : MonoBehaviour
     [SerializeField] private float rotatedMaxCheck;
     [SerializeField] private float addMaxRotation;
 
-    // Properties
-    public float MyScore { get => myScore; set => myScore = value; }
-    public float ScoreToAdd { get => scoreToAdd; set => scoreToAdd = value; }
-    public float RotatedAmount { get => rotatedAmount; set => rotatedAmount = value; }
-    public float RotatedAmountToReset { get => rotatedAmountToReset; set => rotatedAmountToReset = value; }
-    public float ResetRotatedAmount { get => resetRotatedAmount; set => resetRotatedAmount = value; }
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public float ReturnRotationSpeed { get => returnRotationSpeed; set => returnRotationSpeed = value; }
-    public float MaxRotationSpeed { get => maxRotationSpeed; set => maxRotationSpeed = value; }
-    public float AddRotationSpeed { get => addRotationSpeed; set => addRotationSpeed = value; }
-    public float RotatedMaxCheck { get => rotatedMaxCheck; set => rotatedMaxCheck = value; }
-    public float AddMaxRotation { get => addMaxRotation; set => addMaxRotation = value; }
-    public bool Began { get => _began; set => _began = value; }
-    public bool Moved { get => _moved; set => _moved = value; }
-    public bool End { get => _end; set => _end = value; }
-    public bool HasRotated { get => _hasRotated; set => _hasRotated = value; }
-
     // Private fields
     private bool _began;
     private bool _moved;
@@ -59,6 +48,7 @@ public class MainTouchLogic : MonoBehaviour
     void Start()
     {
         Input.simulateMouseWithTouches = true;
+        SetBaseStats();
     }
 
     /// <summary>
@@ -113,7 +103,7 @@ public class MainTouchLogic : MonoBehaviour
         if (_end && !_hasRotated)
         {
             Rotate();
-            AddScore();
+            CoinBalance.Swipe(SwipeAmount);    
 
             if (rotatedAmount >= rotatedMaxCheck)
             {
@@ -140,20 +130,65 @@ public class MainTouchLogic : MonoBehaviour
         }
     }
 
+    private void SetBaseStats()
+    {
+        if (PlayerPrefs.HasKey("SwipeAmount"))
+        {
+            BaseSwipeAmount = Convert.ToInt64(PlayerPrefs.GetString("SwipeAmount"));
+            if (PlayerPrefs.HasKey("Mult"))
+            {
+                Mult = Convert.ToInt64(PlayerPrefs.GetString("Mult"));
+            }
+        }
+        SaveSwipe();
+        print(SwipeAmount);
+    }
+    private void SaveSwipe()
+    {
+        SwipeAmount = BaseSwipeAmount * Mult;
+        PlayerPrefs.SetString("SwipeAmount", BaseSwipeAmount.ToString());
+        PlayerPrefs.SetString("Mult", Mult.ToString());
+        print(SwipeAmount);
+    }
+    public bool AddSwipeAmount(long _Buff, long _Price)
+    {
+        if (CoinBalance.Buy(_Price))
+        {
+            BaseSwipeAmount += _Buff;
+            SaveSwipe();
+            return true;
+        }
+        return false;
+    }
+
+    public bool AddMult(long _Buff, long _Price)
+    {
+        if (CoinBalance.Buy(_Price))
+        {
+            Mult += _Buff;
+            SaveSwipe();
+            return true;
+        }
+        return false;
+    }
+    private void ResetCoins()
+    {
+        BaseSwipeAmount = 1; // StartValues of 1
+        Mult = 1;
+        SaveSwipe();
+    }
+    public void SetReset(Reset _Reset)
+    {
+        _Reset.resetGame += ResetCoins;
+        CoinBalance.SetReseter(_Reset);
+    }
+
     /// <summary>
     /// Rotates the game object based on the current move speed.
     /// </summary>
     private void Rotate()
     {
         transform.Rotate(Vector3.down, moveSpeed * Time.deltaTime);
-    }
-
-    /// <summary>
-    /// Adds the score to the current score.
-    /// </summary>
-    private void AddScore()
-    {
-        myScore += scoreToAdd;
     }
 }
  

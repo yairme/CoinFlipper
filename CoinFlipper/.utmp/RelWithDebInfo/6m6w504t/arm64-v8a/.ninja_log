@@ -1,0 +1,9 @@
+# ninja log v5
+42	8455	7321971388585385	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	cf92e958241546c3
+36	8543	7321971389622891	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	b90ea9d0e350da61
+18	8811	7321971393749109	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	dc5a8852dbf99a51
+30	8893	7321971398729537	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	7006a7f14a739e15
+1	8905	7321971401212891	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	2bb8da98a649b1c1
+23	8909	7321971393709225	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5e0230aa90622b1d
+8459	9632	7321971415423574	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	cf3880dedcfeba10
+9633	9866	7321971417200248	C:/Users/stefa/OneDrive/Documenten/GitHub/CoinFlipper/CoinFlipper/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6m6w504t/obj/arm64-v8a/libgame.so	d6e1fd68d296bbca
