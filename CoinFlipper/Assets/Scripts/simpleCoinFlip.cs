@@ -36,6 +36,9 @@ public class MainTouchLogic : MonoBehaviour
     [SerializeField] private float rotatedMaxCheck;
     [SerializeField] private float addMaxRotation;
 
+
+    private float _coinGainCheck = 1f; // This is only checking if it has swiped or not, so it doesn't need to be heigher than 1
+
     // Private fields
     private bool _began;
     private bool _moved;
@@ -77,13 +80,10 @@ public class MainTouchLogic : MonoBehaviour
             }
         }
 
-        if (_began)
-        {
-            
-        }
         if (_moved)
         {
-            CoinBalance.Swipe(SwipeAmount);   
+            _coinGainCheck++;
+             
             if (moveSpeed <= maxRotationSpeed)
             {
                 moveSpeed += addRotationSpeed;
@@ -94,17 +94,24 @@ public class MainTouchLogic : MonoBehaviour
                 rotatedAmount -= addMaxRotation;
             }
         }
+
         if (_end)
         {
             _hasRotated = false;
+            
             rotatedAmount++;
             resetRotatedAmount = 0;
+        }
+
+        if (_end && !_moved && _coinGainCheck > 1)
+        {
+            CoinBalance.Swipe(SwipeAmount);  
+            _coinGainCheck = 0;
         }
 
         if (_end && !_hasRotated)
         {
             Rotate();
-             
 
             if (rotatedAmount >= rotatedMaxCheck)
             {
