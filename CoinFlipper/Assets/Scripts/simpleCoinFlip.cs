@@ -83,6 +83,7 @@ public class MainTouchLogic : MonoBehaviour
         }
         if (_moved)
         {
+            CoinBalance.Swipe(SwipeAmount);   
             if (moveSpeed <= maxRotationSpeed)
             {
                 moveSpeed += addRotationSpeed;
@@ -103,7 +104,7 @@ public class MainTouchLogic : MonoBehaviour
         if (_end && !_hasRotated)
         {
             Rotate();
-            CoinBalance.Swipe(SwipeAmount);    
+             
 
             if (rotatedAmount >= rotatedMaxCheck)
             {
